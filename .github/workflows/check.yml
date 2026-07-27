@@ -1,0 +1,43 @@
+name: EA稼働確認（Myfxbook巡回）
+
+on:
+  schedule:
+    # 平日 07:00 JST（22:00 UTC 前日）と 15:00 JST（06:00 UTC）
+    # 土日はブローカー停止で「更新停止」誤検知になるため実行しない
+    - cron: '0 22 * * 0-4'   # JST 月〜金 07:00
+    - cron: '0 6 * * 1-5'    # JST 月〜金 15:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ea-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install pyyaml
+
+      - name: Run check
+        env:
+          MYFXBOOK_CREDENTIALS: ${{ secrets.MYFXBOOK_CREDENTIALS }}
+        run: python scripts/check_accounts.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/status.json
+          git diff --cached --quiet || git commit -m "update status $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
+          git push
