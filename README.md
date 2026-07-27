@@ -48,9 +48,11 @@ curl "https://www.myfxbook.com/api/login.json?email=MAIL&password=PASS"
 
 ```json
 {
-  "investar1":  {"email": "investar1のメールアドレス",  "password": "そのMyfxbookパスワード"},
-  "investar2":  {"email": "investar2のメールアドレス",  "password": "そのMyfxbookパスワード"},
-  "investar17": {"email": "investar17のメールアドレス", "password": "そのMyfxbookパスワード"}
+  "investar1":  {"email": "kentasaku78@yahoo.co.jp",  "password": "regista1119"},
+  "investar2":  {"email": "kazumon453@yahoo.co.jp",   "password": "regista1119"},
+  "investar3":  {"email": "simobbk@yahoo.co.jp",      "password": "regista1119"},
+  "investar12": {"email": "itimisb@yahoo.co.jp",      "password": "regista1119"},
+  "investar17": {"email": "salmon_san@yahoo.co.jp",   "password": "regista1119"}
 }
 ```
 
