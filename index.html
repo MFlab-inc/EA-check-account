@@ -128,8 +128,8 @@ fetch('./data/status.json?t=' + Date.now())
       disp.textContent = `一覧に掲載中: ${visible}口座（監視対象 ${activeCount}` +
         (shown ? ` ＋ 監視除外・長期停止 ${hiddenCount}` : ``) + `） ／ 全${d.total_accounts}口座`;
       btn.textContent = shown
-        ? `監視除外・長期停止リストを隠す（${hiddenCount}口座を非表示にする）`
-        : `監視除外・長期停止リストを表示（${hiddenCount}口座を追加表示する）`;
+        ? `監視除外・長期停止リストを隠す（現在の表示: ${visible}口座）`
+        : `監視除外・長期停止リストを表示（現在の表示: ${visible}口座）`;
     };
     if (hiddenCount > 0) {
       btn.style.display = 'inline-block';
