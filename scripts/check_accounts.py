@@ -123,7 +123,7 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
     if last_update:
         hours_since_update = (now_utc - last_update).total_seconds() / 3600
         if hours_since_update >= th["update_stale_alert_hours"]:
-            bump("ALERT", f"Myfxbook更新が{hours_since_update:.0f}時間停止（接続断疑い）")
+            bump("ALERT", f"Myfxbook更新が{hours_since_update:.0f}時間停止（接続切れの疑い）")
         elif hours_since_update >= th["update_stale_warn_hours"]:
             bump("WARN", f"Myfxbook更新が{hours_since_update:.0f}時間停止")
     else:
@@ -143,9 +143,9 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
         # マイナスになる場合は0に丸める
         days_since_trade = max(0, (now_utc - last_activity).days)
         if days_since_trade >= th["no_trade_alert_days"]:
-            bump("WARN", f"最終取引アクティビティから{days_since_trade}日経過（EA停止疑い）")
+            bump("WARN", f"最終取引より{days_since_trade}日経過（EA停止疑い）")
         elif days_since_trade >= th["no_trade_watch_days"]:
-            bump("WATCH", f"最終取引アクティビティから{days_since_trade}日経過")
+            bump("WATCH", f"最終取引より{days_since_trade}日経過")
 
     # 3) オープンポジション構成の長期不変（グリッド系の異常シグナル）
     sig = open_trades_signature(open_trades) if open_trades else ""
@@ -168,7 +168,7 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
     if isinstance(balance, (int, float)) and isinstance(equity, (int, float)) and balance:
         float_dd_pct = round((balance - equity) / balance * 100, 2)
         if float_dd_pct >= th["floating_dd_warn_pct"]:
-            bump("WARN", f"浮動DDが残高比{float_dd_pct:.1f}%")
+            bump("WARN", f"発生DD率が残高比{float_dd_pct:.1f}%")
 
     # 5) 分類の上書き（優先度: RETIRED > STOPPED > 通常判定）
     # RETIRED: config/retired.yaml に明示された運用終了口座
