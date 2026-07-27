@@ -39,6 +39,14 @@
   .badge.WARN  { background: rgba(240,136,62,.15); color: var(--warn); }
   .badge.WATCH { background: rgba(210,153,34,.15); color: var(--watch); }
   .badge.OK    { background: rgba(63,185,80,.12); color: var(--ok); }
+  .badge.STOPPED { background: rgba(139,152,165,.15); color: var(--muted); }
+  .badge.RETIRED { background: rgba(139,152,165,.10); color: #5c6773; }
+  .count.STOPPED .n, .count.RETIRED .n { color: var(--muted); }
+  /* 浮動DD%の色バンド */
+  .dd-blue   { color: #58a6ff; }  /* -1.00以下（含み益方向） */
+  .dd-white  { color: var(--text); } /* -0.99〜4.99（平常） */
+  .dd-yellow { color: #d29922; }  /* 5.00〜19.99（注意） */
+  .dd-red    { color: #f85149; }  /* 20.00以上（警戒） */
   .demo { color: var(--muted); font-size: 11px; }
   .err { background: rgba(248,81,73,.1); border: 1px solid var(--alert);
          border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
@@ -56,19 +64,25 @@
   <thead><tr>
     <th>状態</th><th>口座名</th><th>MFBログイン</th>
     <th>最終更新</th><th>更新停止(h)</th><th>最終取引(日)</th>
-    <th>保有数</th><th>浮動DD%</th><th>理由</th>
+    <th>ポジション保有数</th><th>浮動DD%</th><th>理由</th>
   </tr></thead>
   <tbody id="rows"></tbody>
 </table>
 </div>
 <script>
+function ddClass(v) {
+  if (v >= 20.0) return 'dd-red';     // 20.00〜
+  if (v >= 5.0)  return 'dd-yellow';  // 5.00〜19.99
+  if (v <= -1.0) return 'dd-blue';    // -1.00以下
+  return 'dd-white';                  // -0.99〜4.99
+}
 fetch('./data/status.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     document.getElementById('meta').textContent =
       '生成: ' + d.generated_at_jst + ' ／ 対象口座: ' + d.total_accounts;
     const cc = document.getElementById('counts');
-    for (const lv of ['ALERT','WARN','WATCH','OK']) {
+    for (const lv of ['ALERT','WARN','WATCH','OK','STOPPED','RETIRED']) {
       cc.insertAdjacentHTML('beforeend',
         `<div class="count ${lv}"><div class="n">${d.counts[lv] ?? 0}</div><div class="l">${lv}</div></div>`);
     }
@@ -87,7 +101,8 @@ fetch('./data/status.json?t=' + Date.now())
         <td>${a.hours_since_update ?? ''}</td>
         <td>${a.days_since_trade ?? ''}</td>
         <td>${a.open_trades_count}</td>
-        <td>${a.float_dd_pct ?? ''}</td>
+        <td>${a.float_dd_pct == null ? '' :
+             `<span class="${ddClass(a.float_dd_pct)}">${a.float_dd_pct}</span>`}</td>
         <td class="reasons">${(a.reasons || []).join('<br>')}</td>
       </tr>`);
     }
