@@ -67,6 +67,7 @@
 <body>
 <h1>EA稼働確認ダッシュボード</h1>
 <div class="meta" id="meta">読み込み中…</div>
+<div class="meta" id="dispCount"></div>
 <div id="loginErrors"></div>
 <div class="counts" id="counts"></div>
 <div class="legend">
@@ -111,16 +112,23 @@ fetch('./data/status.json?t=' + Date.now())
     }
     const hiddenLevels = ['STOPPED', 'EXCLUDED', 'RETIRED'];
     const hiddenCount = d.accounts.filter(a => hiddenLevels.includes(a.level)).length;
+    const activeCount = d.total_accounts - hiddenCount;
     const btn = document.getElementById('toggleExcluded');
+    const disp = document.getElementById('dispCount');
+    const refresh = () => {
+      const shown = document.body.classList.contains('show-excluded');
+      const visible = shown ? d.total_accounts : activeCount;
+      disp.textContent = `一覧に掲載中: ${visible}口座（監視対象 ${activeCount}` +
+        (shown ? ` ＋ 監視除外・長期停止 ${hiddenCount}` : ``) + `） ／ 全${d.total_accounts}口座`;
+      btn.textContent = shown
+        ? `監視除外・長期停止リストを隠す（${hiddenCount}口座を非表示にする）`
+        : `監視除外・長期停止リストを表示（${hiddenCount}口座を追加表示する）`;
+    };
     if (hiddenCount > 0) {
       btn.style.display = 'inline-block';
-      const label = () => (document.body.classList.contains('show-excluded')
-        ? `監視除外・長期停止リストを隠す（${hiddenCount}口座）`
-        : `監視除外・長期停止リストを表示（${hiddenCount}口座）`);
-      btn.textContent = label();
-      btn.onclick = () => { document.body.classList.toggle('show-excluded');
-                            btn.textContent = label(); };
+      btn.onclick = () => { document.body.classList.toggle('show-excluded'); refresh(); };
     }
+    refresh();
     const tb = document.getElementById('rows');
     for (const a of d.accounts) {
       tb.insertAdjacentHTML('beforeend', `<tr class="${hiddenLevels.includes(a.level) ? 'excluded-row' : ''}">
