@@ -45,8 +45,18 @@
   /* 浮動DD%の色バンド */
   .dd-blue   { color: #58a6ff; }  /* -1.00以下（含み益方向） */
   .dd-white  { color: var(--text); } /* -0.99〜4.99（平常） */
-  .dd-yellow { color: #d29922; }  /* 5.00〜19.99（注意） */
-  .dd-red    { color: #f85149; }  /* 20.00以上（警戒） */
+  .dd-yellow { color: #d29922; }  /* 5.00〜9.99（要監視） */
+  .dd-red    { color: #f85149; }  /* 10.00以上（警戒） */
+  .legend { color: var(--muted); font-size: 12px; margin: 10px 0 16px; }
+  .legend span { margin-right: 14px; white-space: nowrap; }
+  .toggle-btn { background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 13px;
+    cursor: pointer; margin: 18px 0 8px; }
+  .toggle-btn:hover { color: var(--text); }
+  tr.excluded-row { display: none; opacity: .55; }
+  body.show-excluded tr.excluded-row { display: table-row; }
+  .badge.EXCLUDED { background: rgba(139,152,165,.12); color: var(--muted); }
+  .count.EXCLUDED .n { color: var(--muted); }
   .demo { color: var(--muted); font-size: 11px; }
   .err { background: rgba(248,81,73,.1); border: 1px solid var(--alert);
          border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
@@ -59,6 +69,14 @@
 <div class="meta" id="meta">読み込み中…</div>
 <div id="loginErrors"></div>
 <div class="counts" id="counts"></div>
+<div class="legend">
+  浮動DD%の文字色:
+  <span class="dd-blue">■ 青 = −1.00以下（含み益方向）</span>
+  <span class="dd-white">■ 白 = −0.99〜4.99（平常）</span>
+  <span class="dd-yellow">■ 黄 = 5.00〜9.99（要監視）</span>
+  <span class="dd-red">■ 赤 = 10.00以上（警戒）</span>
+</div>
+<button class="toggle-btn" id="toggleExcluded" style="display:none"></button>
 <div class="tablewrap">
 <table>
   <thead><tr>
@@ -71,8 +89,8 @@
 </div>
 <script>
 function ddClass(v) {
-  if (v >= 20.0) return 'dd-red';     // 20.00〜
-  if (v >= 5.0)  return 'dd-yellow';  // 5.00〜19.99
+  if (v >= 10.0) return 'dd-red';     // 10.00〜
+  if (v >= 5.0)  return 'dd-yellow';  // 5.00〜9.99
   if (v <= -1.0) return 'dd-blue';    // -1.00以下
   return 'dd-white';                  // -0.99〜4.99
 }
@@ -82,7 +100,7 @@ fetch('./data/status.json?t=' + Date.now())
     document.getElementById('meta').textContent =
       '生成: ' + d.generated_at_jst + ' ／ 対象口座: ' + d.total_accounts;
     const cc = document.getElementById('counts');
-    for (const lv of ['ALERT','WARN','WATCH','OK','STOPPED','RETIRED']) {
+    for (const lv of ['ALERT','WARN','WATCH','OK','STOPPED','EXCLUDED','RETIRED']) {
       cc.insertAdjacentHTML('beforeend',
         `<div class="count ${lv}"><div class="n">${d.counts[lv] ?? 0}</div><div class="l">${lv}</div></div>`);
     }
@@ -91,9 +109,21 @@ fetch('./data/status.json?t=' + Date.now())
         '<div class="err"><b>ログイン失敗:</b> ' +
         d.login_errors.map(e => `${e.myfxbook_login}（${e.error}）`).join(' / ') + '</div>';
     }
+    const hiddenLevels = ['STOPPED', 'EXCLUDED', 'RETIRED'];
+    const hiddenCount = d.accounts.filter(a => hiddenLevels.includes(a.level)).length;
+    const btn = document.getElementById('toggleExcluded');
+    if (hiddenCount > 0) {
+      btn.style.display = 'inline-block';
+      const label = () => (document.body.classList.contains('show-excluded')
+        ? `監視除外・長期停止リストを隠す（${hiddenCount}口座）`
+        : `監視除外・長期停止リストを表示（${hiddenCount}口座）`);
+      btn.textContent = label();
+      btn.onclick = () => { document.body.classList.toggle('show-excluded');
+                            btn.textContent = label(); };
+    }
     const tb = document.getElementById('rows');
     for (const a of d.accounts) {
-      tb.insertAdjacentHTML('beforeend', `<tr>
+      tb.insertAdjacentHTML('beforeend', `<tr class="${hiddenLevels.includes(a.level) ? 'excluded-row' : ''}">
         <td><span class="badge ${a.level}">${a.level}</span></td>
         <td>${a.name ?? ''}${a.demo ? ' <span class="demo">demo</span>' : ''}</td>
         <td>${a.myfxbook_login}</td>

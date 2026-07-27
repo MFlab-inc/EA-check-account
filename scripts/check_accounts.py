@@ -68,18 +68,18 @@ def load_thresholds() -> dict:
         return yaml.safe_load(f)
 
 
-def load_retired() -> set:
-    """config/retired.yaml の運用終了口座名リスト"""
+def load_retired() -> tuple[set, set]:
+    """config/retired.yaml から (運用終了リスト, 監視除外リスト) を返す"""
     path = ROOT / "config" / "retired.yaml"
     if not path.exists():
-        return set()
+        return set(), set()
     try:
         with open(path, encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
-        return set(data.get("retired") or [])
+        return set(data.get("retired") or []), set(data.get("excluded") or [])
     except Exception as e:  # noqa: BLE001
         print(f"retired.yaml 読み込み失敗（無視して続行）: {e}", file=sys.stderr)
-        return set()
+        return set(), set()
 
 
 def load_previous_status() -> dict:
@@ -105,7 +105,8 @@ def open_trades_signature(trades: list) -> str:
 
 def evaluate(acc: dict, open_trades: list, last_closed: str | None,
              th: dict, prev: dict, now_utc: datetime,
-             retired_names: set | None = None) -> dict:
+             retired_names: set | None = None,
+             excluded_names: set | None = None) -> dict:
     reasons = []
     level = "OK"  # OK < WATCH < WARN < ALERT
 
@@ -174,6 +175,10 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
     if retired_names and (acc.get("name") in retired_names):
         level = "RETIRED"
         reasons = ["運用終了（retired.yaml指定）"]
+    # EXCLUDED: 監視除外リスト指定。判定から外すがデータは保持（トグル表示用）
+    elif excluded_names and (acc.get("name") in excluded_names):
+        level = "EXCLUDED"
+        reasons = ["監視除外リスト指定"]
     # STOPPED: 更新停止が30日(設定値)を超える長期停止。直近の異変(ALERT)と区別する
     elif hours_since_update is not None and \
             hours_since_update >= th.get("update_stopped_days", 30) * 24:
@@ -199,7 +204,7 @@ def main():
     credentials = json.loads(creds_raw)
 
     th = load_thresholds()
-    retired_names = load_retired()
+    retired_names, excluded_names = load_retired()
     prev = load_previous_status()
     now_utc = datetime.now(timezone.utc)
     results = []
@@ -240,7 +245,8 @@ def main():
                     print(f"  history failed for {acc.get('name')}: {e}", file=sys.stderr)
 
                 ev = evaluate(acc, open_trades, last_closed, th, prev, now_utc,
-                              retired_names=retired_names)
+                              retired_names=retired_names,
+                              excluded_names=excluded_names)
                 # 公開マスク版: 口座番号(accountId)・残高・エクイティ・損益額・gain・drawdownは
                 # リポジトリがPublicのため出力しない。比率(float_dd_pct)と稼働指標のみ。
                 results.append({
@@ -265,7 +271,8 @@ def main():
                     pass
         time.sleep(th.get("per_login_sleep_sec", 3))
 
-    order = {"ALERT": 0, "WARN": 1, "WATCH": 2, "OK": 3, "STOPPED": 4, "RETIRED": 5}
+    order = {"ALERT": 0, "WARN": 1, "WATCH": 2, "OK": 3,
+             "STOPPED": 4, "EXCLUDED": 5, "RETIRED": 6}
     results.sort(key=lambda r: (order.get(r["level"], 9), r.get("name") or ""))
 
     summary = {
@@ -273,7 +280,8 @@ def main():
         "generated_at_utc": now_utc.isoformat(),
         "total_accounts": len(results),
         "counts": {lv: sum(1 for r in results if r["level"] == lv)
-                   for lv in ("ALERT", "WARN", "WATCH", "OK", "STOPPED", "RETIRED")},
+                   for lv in ("ALERT", "WARN", "WATCH", "OK",
+                              "STOPPED", "EXCLUDED", "RETIRED")},
         "login_errors": login_errors,
         "thresholds": th,
         "accounts": results,
@@ -293,7 +301,8 @@ def main():
             c = summary["counts"]
             f.write(f"ALERT: {c['ALERT']} / WARN: {c['WARN']} / "
                     f"WATCH: {c['WATCH']} / OK: {c['OK']} / "
-                    f"長期停止: {c['STOPPED']} / 運用終了: {c['RETIRED']}\n\n")
+                    f"長期停止: {c['STOPPED']} / 監視除外: {c['EXCLUDED']} / "
+                    f"運用終了: {c['RETIRED']}\n\n")
             bad = [r for r in results if r["level"] in ("ALERT", "WARN", "WATCH")]
             if bad:
                 f.write("| Level | 口座 | 理由 |\n|---|---|---|\n")
