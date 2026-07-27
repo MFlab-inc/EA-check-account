@@ -28,6 +28,8 @@ excluded:
   - "Hybrid-MOON" 
   - "IDEAL-Half" 
   - "KI1996" 
+  - "PopinTrade" 
+  - "NEW Trade2504" 
 # --- 2026-07-27 初回実行時点でのSTOPPED候補（更新が数ヶ月〜年単位で停止）---
 # retired:
 #   - "L-EU-30"
