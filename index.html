@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>EA稼働確認ダッシュボード</title>
+<style>
+  :root {
+    --bg: #0f1419; --card: #1a2028; --border: #2a3441;
+    --text: #e6edf3; --muted: #8b98a5;
+    --ok: #3fb950; --watch: #d29922; --warn: #f0883e; --alert: #f85149;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text);
+         font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+         padding: 20px; font-size: 14px; }
+  h1 { font-size: 18px; margin-bottom: 4px; }
+  .meta { color: var(--muted); font-size: 12px; margin-bottom: 16px; }
+  .counts { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .count { background: var(--card); border: 1px solid var(--border);
+           border-radius: 8px; padding: 10px 16px; min-width: 90px; }
+  .count .n { font-size: 22px; font-weight: 700; }
+  .count .l { font-size: 11px; color: var(--muted); }
+  .count.ALERT .n { color: var(--alert); }
+  .count.WARN .n { color: var(--warn); }
+  .count.WATCH .n { color: var(--watch); }
+  .count.OK .n { color: var(--ok); }
+  table { width: 100%; border-collapse: collapse; background: var(--card);
+          border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border);
+           font-size: 13px; white-space: nowrap; }
+  th { background: #141a21; color: var(--muted); font-weight: 600; font-size: 11px;
+       text-transform: uppercase; letter-spacing: .04em; position: sticky; top: 0; }
+  td.reasons { white-space: normal; min-width: 220px; color: var(--muted); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px;
+           font-size: 11px; font-weight: 700; }
+  .badge.ALERT { background: rgba(248,81,73,.15); color: var(--alert); }
+  .badge.WARN  { background: rgba(240,136,62,.15); color: var(--warn); }
+  .badge.WATCH { background: rgba(210,153,34,.15); color: var(--watch); }
+  .badge.OK    { background: rgba(63,185,80,.12); color: var(--ok); }
+  .demo { color: var(--muted); font-size: 11px; }
+  .err { background: rgba(248,81,73,.1); border: 1px solid var(--alert);
+         border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+  .tablewrap { overflow-x: auto; }
+  @media (max-width: 700px) { body { padding: 10px; } }
+</style>
+</head>
+<body>
+<h1>EA稼働確認ダッシュボード</h1>
+<div class="meta" id="meta">読み込み中…</div>
+<div id="loginErrors"></div>
+<div class="counts" id="counts"></div>
+<div class="tablewrap">
+<table>
+  <thead><tr>
+    <th>状態</th><th>口座名</th><th>MFBログイン</th>
+    <th>最終更新</th><th>更新停止(h)</th><th>最終取引(日)</th>
+    <th>保有数</th><th>浮動DD%</th><th>理由</th>
+  </tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+</div>
+<script>
+fetch('./data/status.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('meta').textContent =
+      '生成: ' + d.generated_at_jst + ' ／ 対象口座: ' + d.total_accounts;
+    const cc = document.getElementById('counts');
+    for (const lv of ['ALERT','WARN','WATCH','OK']) {
+      cc.insertAdjacentHTML('beforeend',
+        `<div class="count ${lv}"><div class="n">${d.counts[lv] ?? 0}</div><div class="l">${lv}</div></div>`);
+    }
+    if (d.login_errors && d.login_errors.length) {
+      document.getElementById('loginErrors').innerHTML =
+        '<div class="err"><b>ログイン失敗:</b> ' +
+        d.login_errors.map(e => `${e.myfxbook_login}（${e.error}）`).join(' / ') + '</div>';
+    }
+    const tb = document.getElementById('rows');
+    for (const a of d.accounts) {
+      tb.insertAdjacentHTML('beforeend', `<tr>
+        <td><span class="badge ${a.level}">${a.level}</span></td>
+        <td>${a.name ?? ''}${a.demo ? ' <span class="demo">demo</span>' : ''}</td>
+        <td>${a.myfxbook_login}</td>
+        <td>${a.last_update ?? ''}</td>
+        <td>${a.hours_since_update ?? ''}</td>
+        <td>${a.days_since_trade ?? ''}</td>
+        <td>${a.open_trades_count}</td>
+        <td>${a.float_dd_pct ?? ''}</td>
+        <td class="reasons">${(a.reasons || []).join('<br>')}</td>
+      </tr>`);
+    }
+  })
+  .catch(e => {
+    document.getElementById('meta').textContent =
+      'status.json の読み込みに失敗しました（初回実行前の可能性）: ' + e;
+  });
+</script>
+</body>
+</html>
