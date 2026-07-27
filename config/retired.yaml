@@ -1,0 +1,37 @@
+# 運用終了口座リスト
+# ここに記載した口座は RETIRED として監視対象外（一覧の最下部に表示のみ）になる。
+# 口座名はMyfxbook上の表示名（ダッシュボードの「口座名」列）と完全一致で記載する。
+#
+# 使い方: 下の candidates から運用終了が確定しているものを retired: の下に移す
+# （行頭の「# 」を外してインデントを合わせるだけ）。
+#
+# 注意: STOPPED（30日以上更新なし）は自動分類されるため、ここに書かなくても
+# ALERTを鳴らし続けることはない。ここは「意図して終了した」ことの記録として使う。
+
+retired: []
+
+# --- 2026-07-27 初回実行時点でのSTOPPED候補（更新が数ヶ月〜年単位で停止）---
+# retired:
+#   - "L-EU-30"
+#   - "KOMEI-GEM"
+#   - "KOMEI-myfx"
+#   - "OS-GEM"
+#   - "OS-MYFX"
+#   - "Super Fish"
+#   - "aces"
+#   - "Two-ways"
+#   - "50091767"
+#   - "BS300"
+#   - "NadeshikoFX-USD"
+#   - "MT-GA"
+#   - "LKGOLD-2401"
+#   - "Billion Trade"
+#   - "Billion Trade 2"
+#   - "Dragon Trade"
+#   - "JIN"
+#   - "Magic-ACH"
+#   - "Magic-EN"
+#   - "MTX-AN-202312"
+#   - "EXL-AC"
+#   - "EXL-EA"
+#   - "EXL-EU"

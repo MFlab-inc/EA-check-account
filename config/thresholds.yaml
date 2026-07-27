@@ -21,3 +21,8 @@ floating_dd_warn_pct: 20.0
 # API負荷対策
 per_account_sleep_sec: 2
 per_login_sleep_sec: 3
+
+# 5) 長期停止の自動分離
+#    これを超える更新停止はALERTでなくSTOPPED（長期停止）に分類し、
+#    直近の異変（ALERT/WARN）と区別する
+update_stopped_days: 30

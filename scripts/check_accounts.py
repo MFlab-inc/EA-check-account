@@ -68,6 +68,20 @@ def load_thresholds() -> dict:
         return yaml.safe_load(f)
 
 
+def load_retired() -> set:
+    """config/retired.yaml の運用終了口座名リスト"""
+    path = ROOT / "config" / "retired.yaml"
+    if not path.exists():
+        return set()
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        return set(data.get("retired") or [])
+    except Exception as e:  # noqa: BLE001
+        print(f"retired.yaml 読み込み失敗（無視して続行）: {e}", file=sys.stderr)
+        return set()
+
+
 def load_previous_status() -> dict:
     """前回のstatus.json（open_trades_hashの継続日数計算に使用）"""
     if STATUS_PATH.exists():
@@ -90,7 +104,8 @@ def open_trades_signature(trades: list) -> str:
 
 
 def evaluate(acc: dict, open_trades: list, last_closed: str | None,
-             th: dict, prev: dict, now_utc: datetime) -> dict:
+             th: dict, prev: dict, now_utc: datetime,
+             retired_names: set | None = None) -> dict:
     reasons = []
     level = "OK"  # OK < WATCH < WARN < ALERT
 
@@ -123,7 +138,9 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
         lo = max(lo_dates) if lo_dates else None
     last_activity = max([d for d in (lc, lo) if d], default=None)
     if last_activity:
-        days_since_trade = (now_utc - last_activity).days
+        # Myfxbookのタイムスタンプはブローカー時間（UTCより先行し得る）のため
+        # マイナスになる場合は0に丸める
+        days_since_trade = max(0, (now_utc - last_activity).days)
         if days_since_trade >= th["no_trade_alert_days"]:
             bump("WARN", f"最終取引アクティビティから{days_since_trade}日経過（EA停止疑い）")
         elif days_since_trade >= th["no_trade_watch_days"]:
@@ -152,6 +169,17 @@ def evaluate(acc: dict, open_trades: list, last_closed: str | None,
         if float_dd_pct >= th["floating_dd_warn_pct"]:
             bump("WARN", f"浮動DDが残高比{float_dd_pct:.1f}%")
 
+    # 5) 分類の上書き（優先度: RETIRED > STOPPED > 通常判定）
+    # RETIRED: config/retired.yaml に明示された運用終了口座
+    if retired_names and (acc.get("name") in retired_names):
+        level = "RETIRED"
+        reasons = ["運用終了（retired.yaml指定）"]
+    # STOPPED: 更新停止が30日(設定値)を超える長期停止。直近の異変(ALERT)と区別する
+    elif hours_since_update is not None and \
+            hours_since_update >= th.get("update_stopped_days", 30) * 24:
+        level = "STOPPED"
+        reasons = [f"Myfxbook更新が{hours_since_update / 24:.0f}日停止（長期停止）"]
+
     return {
         "level": level,
         "reasons": reasons,
@@ -171,6 +199,7 @@ def main():
     credentials = json.loads(creds_raw)
 
     th = load_thresholds()
+    retired_names = load_retired()
     prev = load_previous_status()
     now_utc = datetime.now(timezone.utc)
     results = []
@@ -210,7 +239,8 @@ def main():
                 except Exception as e:  # noqa: BLE001
                     print(f"  history failed for {acc.get('name')}: {e}", file=sys.stderr)
 
-                ev = evaluate(acc, open_trades, last_closed, th, prev, now_utc)
+                ev = evaluate(acc, open_trades, last_closed, th, prev, now_utc,
+                              retired_names=retired_names)
                 # 公開マスク版: 口座番号(accountId)・残高・エクイティ・損益額・gain・drawdownは
                 # リポジトリがPublicのため出力しない。比率(float_dd_pct)と稼働指標のみ。
                 results.append({
@@ -235,7 +265,7 @@ def main():
                     pass
         time.sleep(th.get("per_login_sleep_sec", 3))
 
-    order = {"ALERT": 0, "WARN": 1, "WATCH": 2, "OK": 3}
+    order = {"ALERT": 0, "WARN": 1, "WATCH": 2, "OK": 3, "STOPPED": 4, "RETIRED": 5}
     results.sort(key=lambda r: (order.get(r["level"], 9), r.get("name") or ""))
 
     summary = {
@@ -243,7 +273,7 @@ def main():
         "generated_at_utc": now_utc.isoformat(),
         "total_accounts": len(results),
         "counts": {lv: sum(1 for r in results if r["level"] == lv)
-                   for lv in ("ALERT", "WARN", "WATCH", "OK")},
+                   for lv in ("ALERT", "WARN", "WATCH", "OK", "STOPPED", "RETIRED")},
         "login_errors": login_errors,
         "thresholds": th,
         "accounts": results,
@@ -262,8 +292,9 @@ def main():
             f.write(f"## EA稼働確認 {summary['generated_at_jst']}\n\n")
             c = summary["counts"]
             f.write(f"ALERT: {c['ALERT']} / WARN: {c['WARN']} / "
-                    f"WATCH: {c['WATCH']} / OK: {c['OK']}\n\n")
-            bad = [r for r in results if r["level"] != "OK"]
+                    f"WATCH: {c['WATCH']} / OK: {c['OK']} / "
+                    f"長期停止: {c['STOPPED']} / 運用終了: {c['RETIRED']}\n\n")
+            bad = [r for r in results if r["level"] in ("ALERT", "WARN", "WATCH")]
             if bad:
                 f.write("| Level | 口座 | 理由 |\n|---|---|---|\n")
                 for r in bad:
