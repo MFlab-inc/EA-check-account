@@ -89,6 +89,13 @@
 </table>
 </div>
 <script>
+// 前回の開閉状態を復元（このブラウザのみで記憶。他端末とは共有されない）
+try {
+  if (localStorage.getItem('ea-check-show-excluded') === '1') {
+    document.body.classList.add('show-excluded');
+  }
+} catch (e) { /* localStorage無効環境は無視 */ }
+
 function ddClass(v) {
   if (v >= 10.0) return 'dd-red';     // 10.00〜
   if (v >= 5.0)  return 'dd-yellow';  // 5.00〜9.99
@@ -126,7 +133,14 @@ fetch('./data/status.json?t=' + Date.now())
     };
     if (hiddenCount > 0) {
       btn.style.display = 'inline-block';
-      btn.onclick = () => { document.body.classList.toggle('show-excluded'); refresh(); };
+      btn.onclick = () => {
+        document.body.classList.toggle('show-excluded');
+        try {
+          localStorage.setItem('ea-check-show-excluded',
+            document.body.classList.contains('show-excluded') ? '1' : '0');
+        } catch (e) { /* 無視 */ }
+        refresh();
+      };
     }
     refresh();
     const tb = document.getElementById('rows');
