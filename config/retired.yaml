@@ -23,6 +23,11 @@ retired: []
 excluded:
   - "BS300"
   - "Two-ways"
+  - "FECA.co.ltd #60"
+  - "AMA-40JY" 
+  - "Hybrid-MOON" 
+  - "IDEAL-Half" 
+  - "KI1996" 
 # --- 2026-07-27 初回実行時点でのSTOPPED候補（更新が数ヶ月〜年単位で停止）---
 # retired:
 #   - "L-EU-30"
