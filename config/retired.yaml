@@ -20,7 +20,16 @@ retired: []
 # excluded:
 #   - "BS300"
 #   - "Two-ways"
-excluded: []
+excluded:
+  - "AMA-40JY"
+  - "FECA.co.ltd #60"
+  - "Gold Gate"
+  - "Hybrid-MOON"
+  - "IDEAL-Half"
+  - "KI1996"
+  - "NEW Trade2504"
+  - "OG-Lush"
+  - "PopinTrade"
 
 # --- 2026-07-27 初回実行時点でのSTOPPED候補（更新が数ヶ月〜年単位で停止）---
 # retired:
