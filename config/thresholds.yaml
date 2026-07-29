@@ -2,8 +2,8 @@
 # 運用しながら調整する。変更履歴はコミットログで管理。
 
 # 1) Myfxbook更新停止（接続断・ターミナル停止疑い）
-update_stale_warn_hours: 6      # 6時間以上更新なし → WARN
-update_stale_alert_hours: 24    # 24時間以上更新なし → ALERT
+update_stale_warn_hours: 24     # 24時間以上更新なし → WARN
+update_stale_alert_hours: 48    # 48時間以上更新なし → ALERT
 # 注意: 週末はブローカー停止で更新が止まるのが正常。
 #       実行スケジュール側で土日を除外している（check.yml参照）。
 
@@ -16,7 +16,7 @@ no_trade_alert_days: 14         # 14日以上 → WARN
 positions_unchanged_watch_days: 7
 
 # 4) 浮動DD（残高比、balance-equity乖離）
-floating_dd_warn_pct: 20.0
+floating_dd_warn_pct: 10.0
 
 # API負荷対策
 per_account_sleep_sec: 2

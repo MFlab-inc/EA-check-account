@@ -60,6 +60,13 @@
   .demo { color: var(--muted); font-size: 11px; }
   .err { background: rgba(248,81,73,.1); border: 1px solid var(--alert);
          border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+  .criteria { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 16px; margin-bottom: 16px; font-size: 12.5px; color: var(--muted); }
+  .criteria .criteria-title { color: var(--text); font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+  .criteria ul { list-style: none; margin: 0; padding: 0; }
+  .criteria li { padding: 3px 0; border-bottom: 1px dashed var(--border); }
+  .criteria li:last-child { border-bottom: none; }
+  .criteria b { color: var(--text); font-weight: 600; }
   .tablewrap { overflow-x: auto; }
   @media (max-width: 700px) { body { padding: 10px; } }
 </style>
@@ -70,12 +77,9 @@
 <div class="meta" id="dispCount"></div>
 <div id="loginErrors"></div>
 <div class="counts" id="counts"></div>
-<div class="legend">
-  発生DD率の文字色:
-  <span class="dd-blue">■ 青 = −1.00以下（含み益方向）</span>
-  <span class="dd-white">■ 白 = −0.99〜4.99（平常）</span>
-  <span class="dd-yellow">■ 黄 = 5.00〜9.99（要監視）</span>
-  <span class="dd-red">■ 赤 = 10.00以上（警戒）</span>
+<div class="criteria">
+  <div class="criteria-title">判定基準（現在適用中の設定値）</div>
+  <ul id="criteriaList"><li>読み込み中…</li></ul>
 </div>
 <button class="toggle-btn" id="toggleExcluded" style="display:none"></button>
 <div class="tablewrap">
@@ -112,6 +116,24 @@ fetch('./data/status.json?t=' + Date.now())
       cc.insertAdjacentHTML('beforeend',
         `<div class="count ${lv}"><div class="n">${d.counts[lv] ?? 0}</div><div class="l">${lv}</div></div>`);
     }
+    const th = d.thresholds || {};
+    const crit = document.getElementById('criteriaList');
+    const critItems = [
+      `<b>MFB更新停止</b>: WARN ${th.update_stale_warn_hours ?? '?'}時間以上 ／ ` +
+        `ALERT ${th.update_stale_alert_hours ?? '?'}時間以上 ／ ` +
+        `長期停止(STOPPED) ${th.update_stopped_days ?? '?'}日以上`,
+      `<b>最終取引からの経過</b>: WATCH ${th.no_trade_watch_days ?? '?'}日以上 ／ ` +
+        `WARN ${th.no_trade_alert_days ?? '?'}日以上`,
+      `<b>ポジション構成不変</b>: WATCH ${th.positions_unchanged_watch_days ?? '?'}日以上`,
+      `<b>発生DD率（総合判定）</b>: WARN 残高比${th.floating_dd_warn_pct ?? '?'}%以上`,
+      `<b>発生DD率（文字色の目安・表示のみ）</b>: ` +
+        `<span class="dd-blue">青 −1.00以下</span> ／ ` +
+        `<span class="dd-white">白 −0.99〜4.99</span> ／ ` +
+        `<span class="dd-yellow">黄 5.00〜9.99</span> ／ ` +
+        `<span class="dd-red">赤 10.00以上</span>`,
+    ];
+    crit.innerHTML = critItems.map(t => `<li>${t}</li>`).join('');
+
     if (d.login_errors && d.login_errors.length) {
       document.getElementById('loginErrors').innerHTML =
         '<div class="err"><b>ログイン失敗:</b> ' +
