@@ -247,12 +247,14 @@ def main():
                 ev = evaluate(acc, open_trades, last_closed, th, prev, now_utc,
                               retired_names=retired_names,
                               excluded_names=excluded_names)
-                # 公開マスク版: 口座番号(accountId)・残高・エクイティ・損益額・gain・drawdownは
-                # リポジトリがPublicのため出力しない。比率(float_dd_pct)と稼働指標のみ。
+                # 公開マスク版: 口座番号(accountId)は下3桁のみ。残高・エクイティ・
+                # 損益額・gain・drawdownはリポジトリがPublicのため出力しない。
+                acct_no = str(acc.get("accountId") or "")
                 results.append({
                     "myfxbook_login": mfb_name,
                     "myfxbook_oid": oid,  # Myfxbook内部ID(公開プロフィールURLと同一情報)
                     "name": acc.get("name"),
+                    "account_id_masked": ("***" + acct_no[-3:]) if acct_no else None,
                     "demo": acc.get("demo"),
                     "last_update": acc.get("lastUpdateDate"),
                     "last_closed_trade": last_closed,
