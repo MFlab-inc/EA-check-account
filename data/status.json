@@ -1,12 +1,12 @@
 {
-  "generated_at_jst": "2026-08-24 07:16:16 JST",
-  "generated_at_utc": "2026-08-23T22:11:54.308820+00:00",
+  "generated_at_jst": "2026-08-24 15:48:44 JST",
+  "generated_at_utc": "2026-08-24T06:44:28.479568+00:00",
   "total_accounts": 85,
   "counts": {
-    "ALERT": 2,
+    "ALERT": 0,
     "WARN": 3,
     "WATCH": 0,
-    "OK": 44,
+    "OK": 46,
     "STOPPED": 26,
     "EXCLUDED": 10,
     "RETIRED": 0
@@ -25,61 +25,24 @@
   },
   "accounts": [
     {
-      "myfxbook_login": "investar19",
-      "myfxbook_oid": 11981971,
-      "name": "PULSET",
-      "account_id_masked": "***779",
-      "demo": true,
-      "last_update": "08/21/2026 08:02",
-      "last_closed_trade": "08/21/2026 05:25",
-      "open_trades_count": 0,
-      "level": "ALERT",
-      "reasons": [
-        "Myfxbook更新が62時間停止（接続切れの疑い）"
-      ],
-      "hours_since_update": 62.2,
-      "days_since_trade": 2,
-      "open_trades_hash": "",
-      "open_trades_hash_since": null,
-      "float_dd_pct": 0.0
-    },
-    {
-      "myfxbook_login": "investar17",
-      "myfxbook_oid": 11463547,
-      "name": "Trend GOLD",
-      "account_id_masked": "***114",
-      "demo": false,
-      "last_update": "08/21/2026 08:58",
-      "last_closed_trade": "08/20/2026 17:46",
-      "open_trades_count": 0,
-      "level": "ALERT",
-      "reasons": [
-        "Myfxbook更新が61時間停止（接続切れの疑い）"
-      ],
-      "hours_since_update": 61.2,
-      "days_since_trade": 3,
-      "open_trades_hash": "",
-      "open_trades_hash_since": null,
-      "float_dd_pct": 0.0
-    },
-    {
       "myfxbook_login": "investar17",
       "myfxbook_oid": 11446256,
       "name": "MT-GU",
       "account_id_masked": "***607",
       "demo": false,
-      "last_update": "08/23/2026 19:39",
+      "last_update": "08/24/2026 05:39",
       "last_closed_trade": "08/17/2026 04:38",
       "open_trades_count": 2,
       "level": "WARN",
       "reasons": [
-        "発生DD率が残高比38.2%"
+        "最終取引より7日経過",
+        "発生DD率が残高比37.9%"
       ],
-      "hours_since_update": 2.5,
-      "days_since_trade": 6,
+      "hours_since_update": 1.1,
+      "days_since_trade": 7,
       "open_trades_hash": "f576f37936a7619c",
       "open_trades_hash_since": "2026-08-17T22:14:05.231919+00:00",
-      "float_dd_pct": 38.16
+      "float_dd_pct": 37.92
     },
     {
       "myfxbook_login": "investar17",
@@ -87,18 +50,18 @@
       "name": "MTX EG",
       "account_id_masked": "***652",
       "demo": false,
-      "last_update": "08/23/2026 21:18",
+      "last_update": "08/24/2026 03:31",
       "last_closed_trade": "08/21/2026 13:57",
       "open_trades_count": 11,
       "level": "WARN",
       "reasons": [
-        "発生DD率が残高比16.8%"
+        "発生DD率が残高比17.1%"
       ],
-      "hours_since_update": 0.9,
+      "hours_since_update": 3.2,
       "days_since_trade": 2,
       "open_trades_hash": "cb12c5aa310277fb",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 16.83
+      "float_dd_pct": 17.05
     },
     {
       "myfxbook_login": "investar1",
@@ -106,18 +69,18 @@
       "name": "NadeshikoFX",
       "account_id_masked": "***318",
       "demo": false,
-      "last_update": "08/23/2026 05:34",
-      "last_closed_trade": "08/21/2026 16:00",
+      "last_update": "08/23/2026 22:45",
+      "last_closed_trade": "08/24/2026 00:04",
       "open_trades_count": 11,
       "level": "WARN",
       "reasons": [
-        "発生DD率が残高比23.7%"
+        "発生DD率が残高比24.5%"
       ],
-      "hours_since_update": 16.6,
-      "days_since_trade": 1,
-      "open_trades_hash": "e11be10bfef35a13",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 23.67
+      "hours_since_update": 8.0,
+      "days_since_trade": 0,
+      "open_trades_hash": "f661c69c11840fd5",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 24.47
     },
     {
       "myfxbook_login": "investar1",
@@ -125,16 +88,16 @@
       "name": "AMA-50JY",
       "account_id_masked": "***031",
       "demo": false,
-      "last_update": "08/23/2026 20:57",
-      "last_closed_trade": "08/21/2026 17:27",
-      "open_trades_count": 5,
+      "last_update": "08/24/2026 00:49",
+      "last_closed_trade": "08/24/2026 00:05",
+      "open_trades_count": 6,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 1.2,
-      "days_since_trade": 2,
-      "open_trades_hash": "5a528f4effbfffeb",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.7
+      "hours_since_update": 5.9,
+      "days_since_trade": 0,
+      "open_trades_hash": "adb20ef8882086ea",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 1.04
     },
     {
       "myfxbook_login": "investar17",
@@ -142,13 +105,13 @@
       "name": "AMG",
       "account_id_masked": "***061",
       "demo": false,
-      "last_update": "08/23/2026 19:30",
+      "last_update": "08/24/2026 05:28",
       "last_closed_trade": "08/21/2026 01:38",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.7,
-      "days_since_trade": 2,
+      "hours_since_update": 1.3,
+      "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -159,13 +122,13 @@
       "name": "AMG UPD",
       "account_id_masked": "***070",
       "demo": false,
-      "last_update": "08/23/2026 19:49",
-      "last_closed_trade": "08/21/2026 01:10",
+      "last_update": "08/24/2026 05:48",
+      "last_closed_trade": "08/24/2026 02:31",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.4,
-      "days_since_trade": 2,
+      "hours_since_update": 0.9,
+      "days_since_trade": 0,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -176,13 +139,13 @@
       "name": "ASAHI GOLD",
       "account_id_masked": "***976",
       "demo": true,
-      "last_update": "08/23/2026 19:25",
+      "last_update": "08/24/2026 05:22",
       "last_closed_trade": "08/21/2026 02:17",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.8,
-      "days_since_trade": 2,
+      "hours_since_update": 1.4,
+      "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -193,16 +156,16 @@
       "name": "AVA76675135",
       "account_id_masked": "***135",
       "demo": false,
-      "last_update": "08/23/2026 21:15",
+      "last_update": "08/24/2026 03:30",
       "last_closed_trade": "08/21/2026 02:44",
       "open_trades_count": 1,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.9,
-      "days_since_trade": 2,
+      "hours_since_update": 3.2,
+      "days_since_trade": 3,
       "open_trades_hash": "6a87bbe0c9d82829",
       "open_trades_hash_since": "2026-08-21T06:36:16.145115+00:00",
-      "float_dd_pct": -0.41
+      "float_dd_pct": -0.37
     },
     {
       "myfxbook_login": "investar17",
@@ -210,16 +173,16 @@
       "name": "Bible Forex",
       "account_id_masked": "***650",
       "demo": false,
-      "last_update": "08/23/2026 19:57",
+      "last_update": "08/24/2026 05:57",
       "last_closed_trade": "08/20/2026 03:54",
-      "open_trades_count": 0,
+      "open_trades_count": 1,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.2,
-      "days_since_trade": 3,
-      "open_trades_hash": "",
-      "open_trades_hash_since": null,
-      "float_dd_pct": 0.0
+      "hours_since_update": 0.8,
+      "days_since_trade": 0,
+      "open_trades_hash": "d16b49962d3d3274",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.04
     },
     {
       "myfxbook_login": "investar17",
@@ -227,16 +190,16 @@
       "name": "EXL EA2504",
       "account_id_masked": "***039",
       "demo": false,
-      "last_update": "08/23/2026 19:08",
+      "last_update": "08/24/2026 05:04",
       "last_closed_trade": "08/21/2026 14:22",
       "open_trades_count": 5,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 3.1,
+      "hours_since_update": 1.7,
       "days_since_trade": 2,
       "open_trades_hash": "9b49e0901af0c5b6",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.55
+      "float_dd_pct": 0.45
     },
     {
       "myfxbook_login": "investar17",
@@ -244,16 +207,16 @@
       "name": "EXL-AC2407",
       "account_id_masked": "***653",
       "demo": false,
-      "last_update": "08/23/2026 22:05",
-      "last_closed_trade": "08/24/2026 00:02",
-      "open_trades_count": 4,
+      "last_update": "08/24/2026 04:24",
+      "last_closed_trade": "08/24/2026 03:59",
+      "open_trades_count": 5,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
+      "hours_since_update": 2.3,
       "days_since_trade": 0,
-      "open_trades_hash": "d578802ee246ee07",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.52
+      "open_trades_hash": "b42712554becab69",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.46
     },
     {
       "myfxbook_login": "investar17",
@@ -261,16 +224,16 @@
       "name": "EXL-AN",
       "account_id_masked": "***611",
       "demo": false,
-      "last_update": "08/23/2026 22:05",
-      "last_closed_trade": "08/21/2026 17:46",
+      "last_update": "08/24/2026 04:24",
+      "last_closed_trade": "08/24/2026 04:08",
       "open_trades_count": 3,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
-      "days_since_trade": 2,
-      "open_trades_hash": "1b11dfe5ed7efd75",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.07
+      "hours_since_update": 2.3,
+      "days_since_trade": 0,
+      "open_trades_hash": "164f7442b45001c6",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.04
     },
     {
       "myfxbook_login": "investar17",
@@ -278,16 +241,16 @@
       "name": "EXL-AU",
       "account_id_masked": "***610",
       "demo": false,
-      "last_update": "08/23/2026 21:52",
+      "last_update": "08/24/2026 04:09",
       "last_closed_trade": "08/21/2026 18:04",
       "open_trades_count": 6,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.3,
+      "hours_since_update": 2.6,
       "days_since_trade": 2,
       "open_trades_hash": "d7b04fe7d94fd991",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.41
+      "float_dd_pct": 0.39
     },
     {
       "myfxbook_login": "investar17",
@@ -295,16 +258,16 @@
       "name": "EXL-EC",
       "account_id_masked": "***613",
       "demo": false,
-      "last_update": "08/23/2026 19:56",
-      "last_closed_trade": "08/21/2026 12:53",
-      "open_trades_count": 4,
+      "last_update": "08/24/2026 05:55",
+      "last_closed_trade": "08/24/2026 00:02",
+      "open_trades_count": 3,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.3,
-      "days_since_trade": 2,
-      "open_trades_hash": "bb5de8d07d1f3b9b",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.23
+      "hours_since_update": 0.8,
+      "days_since_trade": 0,
+      "open_trades_hash": "384b3ed25866b953",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.13
     },
     {
       "myfxbook_login": "investar17",
@@ -312,16 +275,16 @@
       "name": "EXL-EG",
       "account_id_masked": "***614",
       "demo": false,
-      "last_update": "08/23/2026 20:18",
-      "last_closed_trade": "08/17/2026 18:36",
-      "open_trades_count": 6,
+      "last_update": "08/23/2026 23:52",
+      "last_closed_trade": "08/24/2026 02:36",
+      "open_trades_count": 4,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 1.9,
-      "days_since_trade": 4,
-      "open_trades_hash": "65ff197fd4241293",
-      "open_trades_hash_since": "2026-08-19T22:14:38.099979+00:00",
-      "float_dd_pct": 1.5
+      "hours_since_update": 6.9,
+      "days_since_trade": 0,
+      "open_trades_hash": "d6f78a1d17448f45",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 1.54
     },
     {
       "myfxbook_login": "investar17",
@@ -329,16 +292,16 @@
       "name": "EXL-EU2503",
       "account_id_masked": "***035",
       "demo": false,
-      "last_update": "08/23/2026 19:39",
+      "last_update": "08/24/2026 05:37",
       "last_closed_trade": "08/21/2026 11:13",
       "open_trades_count": 8,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.5,
+      "hours_since_update": 1.1,
       "days_since_trade": 2,
       "open_trades_hash": "75781f392a83b4db",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.16
+      "float_dd_pct": 1.25
     },
     {
       "myfxbook_login": "investar17",
@@ -346,16 +309,16 @@
       "name": "EXL-GC",
       "account_id_masked": "***600",
       "demo": false,
-      "last_update": "08/23/2026 21:40",
+      "last_update": "08/24/2026 03:55",
       "last_closed_trade": "08/24/2026 00:02",
-      "open_trades_count": 2,
+      "open_trades_count": 3,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.5,
+      "hours_since_update": 2.8,
       "days_since_trade": 0,
-      "open_trades_hash": "7719ce80b3e030bc",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.24
+      "open_trades_hash": "054a47c525053088",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.13
     },
     {
       "myfxbook_login": "investar17",
@@ -363,16 +326,16 @@
       "name": "EXL-UC-1",
       "account_id_masked": "***609",
       "demo": false,
-      "last_update": "08/23/2026 21:51",
+      "last_update": "08/24/2026 04:09",
       "last_closed_trade": "08/21/2026 08:43",
       "open_trades_count": 15,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.3,
+      "hours_since_update": 2.6,
       "days_since_trade": 0,
       "open_trades_hash": "3d6fae6fe8cbb2db",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.79
+      "float_dd_pct": 2.09
     },
     {
       "myfxbook_login": "investar17",
@@ -380,16 +343,16 @@
       "name": "EXL-UC-2",
       "account_id_masked": "***597",
       "demo": false,
-      "last_update": "08/23/2026 21:51",
+      "last_update": "08/24/2026 04:09",
       "last_closed_trade": "08/21/2026 08:43",
       "open_trades_count": 15,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.3,
+      "hours_since_update": 2.6,
       "days_since_trade": 0,
       "open_trades_hash": "3d6fae6fe8cbb2db",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.78
+      "float_dd_pct": 2.12
     },
     {
       "myfxbook_login": "investar2",
@@ -397,13 +360,13 @@
       "name": "FECA#31",
       "account_id_masked": "***633",
       "demo": false,
-      "last_update": "08/23/2026 20:48",
+      "last_update": "08/24/2026 00:25",
       "last_closed_trade": "08/20/2026 03:55",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 1.4,
-      "days_since_trade": 3,
+      "hours_since_update": 6.3,
+      "days_since_trade": 4,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -419,8 +382,8 @@
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 1.3,
-      "days_since_trade": 2,
+      "hours_since_update": 9.9,
+      "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -431,13 +394,13 @@
       "name": "GEKI-WTI",
       "account_id_masked": "***213",
       "demo": true,
-      "last_update": "08/23/2026 19:21",
+      "last_update": "08/24/2026 05:17",
       "last_closed_trade": "08/21/2026 03:32",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.8,
-      "days_since_trade": 2,
+      "hours_since_update": 1.5,
+      "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -453,7 +416,7 @@
       "open_trades_count": 12,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.1,
+      "hours_since_update": 10.6,
       "days_since_trade": 2,
       "open_trades_hash": "8e6c506bfa9db211",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
@@ -470,8 +433,8 @@
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 5.3,
-      "days_since_trade": 3,
+      "hours_since_update": 13.9,
+      "days_since_trade": 4,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -482,16 +445,16 @@
       "name": "L-NU",
       "account_id_masked": "***599",
       "demo": false,
-      "last_update": "08/23/2026 21:51",
+      "last_update": "08/24/2026 04:09",
       "last_closed_trade": "08/21/2026 14:30",
       "open_trades_count": 6,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.3,
+      "hours_since_update": 2.6,
       "days_since_trade": 2,
       "open_trades_hash": "82dfc08b17116a18",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.59
+      "float_dd_pct": 0.57
     },
     {
       "myfxbook_login": "investar17",
@@ -504,7 +467,7 @@
       "open_trades_count": 6,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
+      "hours_since_update": 8.7,
       "days_since_trade": 0,
       "open_trades_hash": "6bc8a001a64696d8",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
@@ -516,16 +479,16 @@
       "name": "LK-EG",
       "account_id_masked": "***593",
       "demo": false,
-      "last_update": "08/23/2026 19:29",
+      "last_update": "08/24/2026 05:27",
       "last_closed_trade": "08/21/2026 04:03",
       "open_trades_count": 6,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.7,
-      "days_since_trade": 2,
+      "hours_since_update": 1.3,
+      "days_since_trade": 3,
       "open_trades_hash": "b10ff15affd3fef7",
       "open_trades_hash_since": "2026-08-21T06:36:16.145115+00:00",
-      "float_dd_pct": 1.06
+      "float_dd_pct": 1.22
     },
     {
       "myfxbook_login": "investar17",
@@ -533,16 +496,16 @@
       "name": "LK-EU",
       "account_id_masked": "***596",
       "demo": false,
-      "last_update": "08/23/2026 19:30",
+      "last_update": "08/24/2026 05:27",
       "last_closed_trade": "08/07/2026 17:06",
       "open_trades_count": 4,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.7,
+      "hours_since_update": 1.3,
       "days_since_trade": 3,
       "open_trades_hash": "bf68bbb204684658",
       "open_trades_hash_since": "2026-08-20T22:16:41.195429+00:00",
-      "float_dd_pct": -0.06
+      "float_dd_pct": -0.02
     },
     {
       "myfxbook_login": "investar17",
@@ -550,16 +513,16 @@
       "name": "LK-UC",
       "account_id_masked": "***595",
       "demo": false,
-      "last_update": "08/23/2026 21:51",
+      "last_update": "08/24/2026 04:09",
       "last_closed_trade": "08/21/2026 05:45",
-      "open_trades_count": 11,
+      "open_trades_count": 12,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.3,
-      "days_since_trade": 2,
-      "open_trades_hash": "a4f575c405178ed7",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": -1.77
+      "hours_since_update": 2.6,
+      "days_since_trade": 0,
+      "open_trades_hash": "8a1888dd042a258f",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": -0.81
     },
     {
       "myfxbook_login": "investar17",
@@ -567,12 +530,12 @@
       "name": "LKGJ-2401",
       "account_id_masked": "***619",
       "demo": false,
-      "last_update": "08/23/2026 18:46",
+      "last_update": "08/24/2026 04:40",
       "last_closed_trade": "08/21/2026 10:49",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 3.4,
+      "hours_since_update": 2.1,
       "days_since_trade": 2,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -584,16 +547,16 @@
       "name": "M5-MYFX",
       "account_id_masked": "***687",
       "demo": true,
-      "last_update": "08/23/2026 19:23",
+      "last_update": "08/23/2026 22:53",
       "last_closed_trade": "08/19/2026 03:45",
       "open_trades_count": 16,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.8,
+      "hours_since_update": 7.9,
       "days_since_trade": 3,
       "open_trades_hash": "3b196aa05a5f9af4",
       "open_trades_hash_since": "2026-08-20T22:16:41.195429+00:00",
-      "float_dd_pct": 1.5
+      "float_dd_pct": 1.43
     },
     {
       "myfxbook_login": "investar17",
@@ -601,16 +564,16 @@
       "name": "MT-EU",
       "account_id_masked": "***606",
       "demo": false,
-      "last_update": "08/23/2026 18:44",
+      "last_update": "08/24/2026 04:38",
       "last_closed_trade": "08/20/2026 10:42",
       "open_trades_count": 2,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 3.5,
+      "hours_since_update": 2.1,
       "days_since_trade": 3,
       "open_trades_hash": "50b96091999663c4",
       "open_trades_hash_since": "2026-08-20T22:16:41.195429+00:00",
-      "float_dd_pct": -0.24
+      "float_dd_pct": -0.19
     },
     {
       "myfxbook_login": "investar17",
@@ -618,16 +581,16 @@
       "name": "MTX-AN-2602",
       "account_id_masked": "***087",
       "demo": false,
-      "last_update": "08/23/2026 22:02",
+      "last_update": "08/24/2026 04:21",
       "last_closed_trade": "08/24/2026 00:36",
       "open_trades_count": 16,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.2,
+      "hours_since_update": 2.4,
       "days_since_trade": 0,
       "open_trades_hash": "2f93689346ebd1a0",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.88
+      "float_dd_pct": 1.84
     },
     {
       "myfxbook_login": "investar17",
@@ -635,16 +598,16 @@
       "name": "Magic-AC",
       "account_id_masked": "***603",
       "demo": false,
-      "last_update": "08/23/2026 19:19",
+      "last_update": "08/24/2026 05:15",
       "last_closed_trade": "08/20/2026 18:24",
       "open_trades_count": 11,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.9,
+      "hours_since_update": 1.5,
       "days_since_trade": 2,
       "open_trades_hash": "973c5f522b867461",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.03
+      "float_dd_pct": 2.3
     },
     {
       "myfxbook_login": "investar17",
@@ -652,16 +615,16 @@
       "name": "Magic-AU",
       "account_id_masked": "***604",
       "demo": false,
-      "last_update": "08/23/2026 22:07",
+      "last_update": "08/24/2026 04:27",
       "last_closed_trade": "08/20/2026 21:54",
       "open_trades_count": 9,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
+      "hours_since_update": 2.3,
       "days_since_trade": 2,
       "open_trades_hash": "8d66eb50433a22e2",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.1
+      "float_dd_pct": 0.63
     },
     {
       "myfxbook_login": "investar12",
@@ -669,16 +632,16 @@
       "name": "Magic-AUDCAD250",
       "account_id_masked": "***437",
       "demo": true,
-      "last_update": "08/23/2026 22:06",
+      "last_update": "08/24/2026 04:25",
       "last_closed_trade": "08/20/2026 18:24",
       "open_trades_count": 11,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
+      "hours_since_update": 2.3,
       "days_since_trade": 2,
       "open_trades_hash": "fe208c1393ed41cb",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.97
+      "float_dd_pct": 1.66
     },
     {
       "myfxbook_login": "investar12",
@@ -686,16 +649,16 @@
       "name": "Magic-AUDCHF250",
       "account_id_masked": "***436",
       "demo": true,
-      "last_update": "08/23/2026 17:20",
+      "last_update": "08/24/2026 00:28",
       "last_closed_trade": "08/20/2026 16:06",
       "open_trades_count": 9,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 4.9,
+      "hours_since_update": 6.3,
       "days_since_trade": 2,
       "open_trades_hash": "0ac0d34a37397342",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 1.02
+      "float_dd_pct": 0.38
     },
     {
       "myfxbook_login": "investar17",
@@ -703,16 +666,16 @@
       "name": "Magic-EN2508",
       "account_id_masked": "***069",
       "demo": false,
-      "last_update": "08/23/2026 19:13",
+      "last_update": "08/24/2026 05:08",
       "last_closed_trade": "08/20/2026 17:05",
       "open_trades_count": 11,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 3.0,
+      "hours_since_update": 1.6,
       "days_since_trade": 2,
       "open_trades_hash": "af8c2b174d85a08f",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 3.05
+      "float_dd_pct": 1.9
     },
     {
       "myfxbook_login": "investar12",
@@ -720,16 +683,16 @@
       "name": "Magic-ph",
       "account_id_masked": "***032",
       "demo": true,
-      "last_update": "08/23/2026 19:03",
-      "last_closed_trade": "08/21/2026 05:44",
+      "last_update": "08/24/2026 04:58",
+      "last_closed_trade": "08/24/2026 03:36",
       "open_trades_count": 2,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 3.1,
-      "days_since_trade": 2,
-      "open_trades_hash": "73ab8e54f86a8f33",
-      "open_trades_hash_since": "2026-08-21T06:36:16.145115+00:00",
-      "float_dd_pct": -0.15
+      "hours_since_update": 1.8,
+      "days_since_trade": 0,
+      "open_trades_hash": "738548d04145f0f6",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": -0.1
     },
     {
       "myfxbook_login": "investar17",
@@ -737,16 +700,16 @@
       "name": "Maple Roo",
       "account_id_masked": "***088",
       "demo": false,
-      "last_update": "08/23/2026 19:56",
+      "last_update": "08/24/2026 05:56",
       "last_closed_trade": "08/21/2026 11:26",
-      "open_trades_count": 9,
+      "open_trades_count": 14,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.3,
-      "days_since_trade": 2,
-      "open_trades_hash": "1ca3397b1808788f",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 3.08
+      "hours_since_update": 0.8,
+      "days_since_trade": 0,
+      "open_trades_hash": "6f88367b1d6cb2a7",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 5.4
     },
     {
       "myfxbook_login": "investar1",
@@ -754,16 +717,33 @@
       "name": "PTS",
       "account_id_masked": "***075",
       "demo": false,
-      "last_update": "08/23/2026 19:22",
-      "last_closed_trade": "08/21/2026 05:44",
-      "open_trades_count": 2,
+      "last_update": "08/24/2026 05:18",
+      "last_closed_trade": "08/24/2026 03:36",
+      "open_trades_count": 1,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.8,
-      "days_since_trade": 2,
-      "open_trades_hash": "30c0c7056e34785d",
-      "open_trades_hash_since": "2026-08-21T06:36:16.145115+00:00",
-      "float_dd_pct": -0.29
+      "hours_since_update": 1.4,
+      "days_since_trade": 0,
+      "open_trades_hash": "c6626111376939f8",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": -0.21
+    },
+    {
+      "myfxbook_login": "investar19",
+      "myfxbook_oid": 11981971,
+      "name": "PULSET",
+      "account_id_masked": "***779",
+      "demo": true,
+      "last_update": "08/24/2026 04:51",
+      "last_closed_trade": "08/24/2026 07:17",
+      "open_trades_count": 0,
+      "level": "OK",
+      "reasons": [],
+      "hours_since_update": 1.9,
+      "days_since_trade": 0,
+      "open_trades_hash": "",
+      "open_trades_hash_since": null,
+      "float_dd_pct": 0.0
     },
     {
       "myfxbook_login": "investar30",
@@ -771,16 +751,16 @@
       "name": "Phoenix-AVA",
       "account_id_masked": "***372",
       "demo": false,
-      "last_update": "08/23/2026 19:56",
+      "last_update": "08/24/2026 06:04",
       "last_closed_trade": "08/20/2026 00:54",
-      "open_trades_count": 0,
+      "open_trades_count": 1,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.3,
-      "days_since_trade": 3,
-      "open_trades_hash": "",
-      "open_trades_hash_since": null,
-      "float_dd_pct": 0.0
+      "hours_since_update": 0.7,
+      "days_since_trade": 0,
+      "open_trades_hash": "9cc5c4adc63c528d",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.1
     },
     {
       "myfxbook_login": "investar17",
@@ -788,16 +768,33 @@
       "name": "Ryu AC2504",
       "account_id_masked": "***038",
       "demo": false,
-      "last_update": "08/23/2026 19:40",
-      "last_closed_trade": "08/21/2026 17:48",
-      "open_trades_count": 6,
+      "last_update": "08/24/2026 05:38",
+      "last_closed_trade": "08/24/2026 00:02",
+      "open_trades_count": 8,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.5,
-      "days_since_trade": 2,
-      "open_trades_hash": "000e1749d6c9b7c1",
-      "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.26
+      "hours_since_update": 1.1,
+      "days_since_trade": 0,
+      "open_trades_hash": "7c9bf625b3dc997c",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.42
+    },
+    {
+      "myfxbook_login": "investar17",
+      "myfxbook_oid": 11463547,
+      "name": "Trend GOLD",
+      "account_id_masked": "***114",
+      "demo": false,
+      "last_update": "08/24/2026 06:37",
+      "last_closed_trade": "08/20/2026 17:46",
+      "open_trades_count": 0,
+      "level": "OK",
+      "reasons": [],
+      "hours_since_update": 0.1,
+      "days_since_trade": 3,
+      "open_trades_hash": "",
+      "open_trades_hash_since": null,
+      "float_dd_pct": 0.0
     },
     {
       "myfxbook_login": "investar17",
@@ -805,16 +802,16 @@
       "name": "ZEN AC",
       "account_id_masked": "***655",
       "demo": false,
-      "last_update": "08/23/2026 22:04",
+      "last_update": "08/24/2026 04:24",
       "last_closed_trade": "08/24/2026 00:04",
       "open_trades_count": 5,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 0.1,
+      "hours_since_update": 2.3,
       "days_since_trade": 0,
       "open_trades_hash": "7882997ce0d36670",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.23
+      "float_dd_pct": 0.21
     },
     {
       "myfxbook_login": "investar17",
@@ -822,16 +819,16 @@
       "name": "ZEN EG",
       "account_id_masked": "***036",
       "demo": false,
-      "last_update": "08/23/2026 19:23",
+      "last_update": "08/24/2026 05:20",
       "last_closed_trade": "08/19/2026 23:00",
       "open_trades_count": 4,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 2.8,
+      "hours_since_update": 1.4,
       "days_since_trade": 2,
       "open_trades_hash": "32e7470bb8352a55",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.13
+      "float_dd_pct": 0.12
     },
     {
       "myfxbook_login": "investar17",
@@ -839,16 +836,16 @@
       "name": "Zen EU2504",
       "account_id_masked": "***040",
       "demo": false,
-      "last_update": "08/23/2026 16:52",
+      "last_update": "08/23/2026 23:58",
       "last_closed_trade": "08/21/2026 12:07",
       "open_trades_count": 8,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 5.3,
+      "hours_since_update": 6.8,
       "days_since_trade": 2,
       "open_trades_hash": "e306fc4424e9f853",
       "open_trades_hash_since": "2026-08-23T22:11:54.308820+00:00",
-      "float_dd_pct": 0.38
+      "float_dd_pct": 0.43
     },
     {
       "myfxbook_login": "investar17",
@@ -856,12 +853,12 @@
       "name": "junk-gold2310",
       "account_id_masked": "***617",
       "demo": false,
-      "last_update": "08/23/2026 21:08",
+      "last_update": "08/24/2026 03:08",
       "last_closed_trade": "08/20/2026 15:05",
       "open_trades_count": 0,
       "level": "OK",
       "reasons": [],
-      "hours_since_update": 1.1,
+      "hours_since_update": 3.6,
       "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -880,8 +877,8 @@
       "reasons": [
         "Myfxbook更新が542日停止（長期停止）"
       ],
-      "hours_since_update": 13004.2,
-      "days_since_trade": 636,
+      "hours_since_update": 13012.8,
+      "days_since_trade": 637,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": null
@@ -899,7 +896,7 @@
       "reasons": [
         "Myfxbook更新が409日停止（長期停止）"
       ],
-      "hours_since_update": 9812.8,
+      "hours_since_update": 9821.4,
       "days_since_trade": 492,
       "open_trades_hash": "77c4a3b8a0637b84",
       "open_trades_hash_since": "2026-07-27T09:01:43.877568+00:00",
@@ -918,8 +915,8 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2659.6,
-      "days_since_trade": 500,
+      "hours_since_update": 2668.1,
+      "days_since_trade": 501,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -937,7 +934,7 @@
       "reasons": [
         "Myfxbook更新が112日停止（長期停止）"
       ],
-      "hours_since_update": 2682.6,
+      "hours_since_update": 2691.2,
       "days_since_trade": 319,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -956,8 +953,8 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2655.7,
-      "days_since_trade": 198,
+      "hours_since_update": 2664.2,
+      "days_since_trade": 199,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -975,8 +972,8 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2659.1,
-      "days_since_trade": 769,
+      "hours_since_update": 2667.7,
+      "days_since_trade": 770,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -994,8 +991,8 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2655.5,
-      "days_since_trade": 503,
+      "hours_since_update": 2664.0,
+      "days_since_trade": 504,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1013,7 +1010,7 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2655.5,
+      "hours_since_update": 2664.0,
       "days_since_trade": 535,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1032,7 +1029,7 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2658.7,
+      "hours_since_update": 2667.2,
       "days_since_trade": 347,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1049,10 +1046,10 @@
       "open_trades_count": 0,
       "level": "STOPPED",
       "reasons": [
-        "Myfxbook更新が1164日停止（長期停止）"
+        "Myfxbook更新が1165日停止（長期停止）"
       ],
-      "hours_since_update": 27945.4,
-      "days_since_trade": 1181,
+      "hours_since_update": 27954.0,
+      "days_since_trade": 1182,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1070,7 +1067,7 @@
       "reasons": [
         "Myfxbook更新が493日停止（長期停止）"
       ],
-      "hours_since_update": 11831.9,
+      "hours_since_update": 11840.5,
       "days_since_trade": 983,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1089,7 +1086,7 @@
       "reasons": [
         "Myfxbook更新が1179日停止（長期停止）"
       ],
-      "hours_since_update": 28297.3,
+      "hours_since_update": 28305.9,
       "days_since_trade": 1179,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1108,8 +1105,8 @@
       "reasons": [
         "Myfxbook更新が731日停止（長期停止）"
       ],
-      "hours_since_update": 17541.9,
-      "days_since_trade": 897,
+      "hours_since_update": 17550.5,
+      "days_since_trade": 898,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1127,7 +1124,7 @@
       "reasons": [
         "Myfxbook更新が1155日停止（長期停止）"
       ],
-      "hours_since_update": 27718.5,
+      "hours_since_update": 27727.1,
       "days_since_trade": 1319,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1146,7 +1143,7 @@
       "reasons": [
         "Myfxbook更新が892日停止（長期停止）"
       ],
-      "hours_since_update": 21403.5,
+      "hours_since_update": 21412.1,
       "days_since_trade": 1011,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1165,8 +1162,8 @@
       "reasons": [
         "Myfxbook更新が112日停止（長期停止）"
       ],
-      "hours_since_update": 2679.6,
-      "days_since_trade": 194,
+      "hours_since_update": 2688.1,
+      "days_since_trade": 195,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": -0.0
@@ -1184,7 +1181,7 @@
       "reasons": [
         "Myfxbook更新が115日停止（長期停止）"
       ],
-      "hours_since_update": 2756.6,
+      "hours_since_update": 2765.2,
       "days_since_trade": 773,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1201,10 +1198,10 @@
       "open_trades_count": 0,
       "level": "STOPPED",
       "reasons": [
-        "Myfxbook更新が1164日停止（長期停止）"
+        "Myfxbook更新が1165日停止（長期停止）"
       ],
-      "hours_since_update": 27946.0,
-      "days_since_trade": 1180,
+      "hours_since_update": 27954.5,
+      "days_since_trade": 1181,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1220,10 +1217,10 @@
       "open_trades_count": 0,
       "level": "STOPPED",
       "reasons": [
-        "Myfxbook更新が1164日停止（長期停止）"
+        "Myfxbook更新が1165日停止（長期停止）"
       ],
-      "hours_since_update": 27945.7,
-      "days_since_trade": 1180,
+      "hours_since_update": 27954.3,
+      "days_since_trade": 1181,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1241,8 +1238,8 @@
       "reasons": [
         "Myfxbook更新が111日停止（長期停止）"
       ],
-      "hours_since_update": 2658.9,
-      "days_since_trade": 368,
+      "hours_since_update": 2667.5,
+      "days_since_trade": 369,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1260,7 +1257,7 @@
       "reasons": [
         "Myfxbook更新が1313日停止（長期停止）"
       ],
-      "hours_since_update": 31501.2,
+      "hours_since_update": 31509.7,
       "days_since_trade": null,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1277,9 +1274,9 @@
       "open_trades_count": 0,
       "level": "STOPPED",
       "reasons": [
-        "Myfxbook更新が1164日停止（長期停止）"
+        "Myfxbook更新が1165日停止（長期停止）"
       ],
-      "hours_since_update": 27945.2,
+      "hours_since_update": 27953.7,
       "days_since_trade": 1179,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1298,7 +1295,7 @@
       "reasons": [
         "Myfxbook更新が784日停止（長期停止）"
       ],
-      "hours_since_update": 18815.7,
+      "hours_since_update": 18824.2,
       "days_since_trade": 983,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1317,8 +1314,8 @@
       "reasons": [
         "Myfxbook更新が957日停止（長期停止）"
       ],
-      "hours_since_update": 22969.2,
-      "days_since_trade": 968,
+      "hours_since_update": 22977.8,
+      "days_since_trade": 969,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": null
@@ -1336,7 +1333,7 @@
       "reasons": [
         "Myfxbook更新が556日停止（長期停止）"
       ],
-      "hours_since_update": 13339.5,
+      "hours_since_update": 13348.0,
       "days_since_trade": 641,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1355,8 +1352,8 @@
       "reasons": [
         "Myfxbook更新が959日停止（長期停止）"
       ],
-      "hours_since_update": 23014.9,
-      "days_since_trade": 1327,
+      "hours_since_update": 23023.5,
+      "days_since_trade": 1328,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": null
@@ -1374,7 +1371,7 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 6.7,
+      "hours_since_update": 15.2,
       "days_since_trade": 497,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1393,7 +1390,7 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 6.5,
+      "hours_since_update": 15.0,
       "days_since_trade": 153,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1405,15 +1402,15 @@
       "name": "Gold Gate",
       "account_id_masked": "***877",
       "demo": false,
-      "last_update": "08/23/2026 00:23",
+      "last_update": "08/24/2026 00:25",
       "last_closed_trade": "06/26/2026 06:15",
       "open_trades_count": 0,
       "level": "EXCLUDED",
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 21.8,
-      "days_since_trade": 58,
+      "hours_since_update": 6.3,
+      "days_since_trade": 59,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1424,15 +1421,15 @@
       "name": "HHD-3521",
       "account_id_masked": "***521",
       "demo": false,
-      "last_update": "08/23/2026 19:54",
+      "last_update": "08/24/2026 05:53",
       "last_closed_trade": "08/21/2026 05:44",
       "open_trades_count": 0,
       "level": "EXCLUDED",
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 2.3,
-      "days_since_trade": 2,
+      "hours_since_update": 0.9,
+      "days_since_trade": 3,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1450,8 +1447,8 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 10.8,
-      "days_since_trade": 1094,
+      "hours_since_update": 19.4,
+      "days_since_trade": 1095,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": null
@@ -1469,8 +1466,8 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 10.9,
-      "days_since_trade": 499,
+      "hours_since_update": 19.5,
+      "days_since_trade": 500,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1488,7 +1485,7 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 10.4,
+      "hours_since_update": 19.0,
       "days_since_trade": 835,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
@@ -1500,18 +1497,18 @@
       "name": "NEW Trade2504",
       "account_id_masked": "***449",
       "demo": false,
-      "last_update": "08/23/2026 18:23",
+      "last_update": "08/24/2026 04:11",
       "last_closed_trade": "08/20/2026 13:30",
-      "open_trades_count": 0,
+      "open_trades_count": 2,
       "level": "EXCLUDED",
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 3.8,
-      "days_since_trade": 3,
-      "open_trades_hash": "",
-      "open_trades_hash_since": null,
-      "float_dd_pct": 0.0
+      "hours_since_update": 2.6,
+      "days_since_trade": 0,
+      "open_trades_hash": "d60bfed22db8c8cb",
+      "open_trades_hash_since": "2026-08-24T06:44:28.479568+00:00",
+      "float_dd_pct": 0.04
     },
     {
       "myfxbook_login": "investar1",
@@ -1519,15 +1516,15 @@
       "name": "OG-Lush",
       "account_id_masked": "***284",
       "demo": false,
-      "last_update": "08/22/2026 23:49",
+      "last_update": "08/23/2026 23:51",
       "last_closed_trade": "07/10/2026 04:18",
       "open_trades_count": 0,
       "level": "EXCLUDED",
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 22.4,
-      "days_since_trade": 44,
+      "hours_since_update": 6.9,
+      "days_since_trade": 45,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
       "float_dd_pct": 0.0
@@ -1545,7 +1542,7 @@
       "reasons": [
         "監視除外リスト指定"
       ],
-      "hours_since_update": 6.7,
+      "hours_since_update": 15.2,
       "days_since_trade": 451,
       "open_trades_hash": "",
       "open_trades_hash_since": null,
