@@ -53,8 +53,8 @@
     color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 13px;
     cursor: pointer; margin: 18px 0 8px; }
   .toggle-btn:hover { color: var(--text); }
-  tr.excluded-row { display: none; opacity: .55; }
-  body.show-excluded tr.excluded-row { display: table-row; }
+  /* 表示・非表示の制御はJS(refresh)が担当。CSSは見た目のみ */
+  tr.excluded-row { opacity: .55; }
   .badge.EXCLUDED { background: rgba(139,152,165,.12); color: var(--muted); }
   .count.EXCLUDED .n { color: var(--muted); }
   .demo { color: var(--muted); font-size: 11px; }
@@ -67,6 +67,16 @@
   .criteria li { padding: 3px 0; border-bottom: 1px dashed var(--border); }
   .criteria li:last-child { border-bottom: none; }
   .criteria b { color: var(--text); font-weight: 600; }
+  .cat { display: inline-block; padding: 2px 8px; border-radius: 4px;
+         font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+  .cat-EA   { background: rgba(88,166,255,.15); color: #58a6ff; }
+  .cat-PAMM { background: rgba(210,153,34,.18); color: #d29922; }
+  .filters { display: flex; gap: 8px; margin: 14px 0 4px; flex-wrap: wrap; }
+  .filter-btn { background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); border-radius: 8px; padding: 6px 14px; font-size: 13px;
+    cursor: pointer; }
+  .filter-btn:hover { color: var(--text); }
+  .filter-btn.active { border-color: #58a6ff; color: var(--text); }
   .tablewrap { overflow-x: auto; }
   @media (max-width: 700px) { body { padding: 10px; } }
 </style>
@@ -81,11 +91,12 @@
   <div class="criteria-title">判定基準（現在適用中の設定値）</div>
   <ul id="criteriaList"><li>読み込み中…</li></ul>
 </div>
+<div class="filters" id="catFilters"></div>
 <button class="toggle-btn" id="toggleExcluded" style="display:none"></button>
 <div class="tablewrap">
 <table>
   <thead><tr>
-    <th>状態</th><th>口座名</th><th>口座番号</th><th>MFBログイン</th>
+    <th>状態</th><th>区分</th><th>口座名</th><th>口座番号</th><th>MFBログイン</th>
     <th>最終更新</th><th>MFB更新停止(h)</th><th>最終取引(日)</th>
     <th>ポジション保有数</th><th>発生DD率</th><th>理由</th>
   </tr></thead>
@@ -144,15 +155,52 @@ fetch('./data/status.json?t=' + Date.now())
     const activeCount = d.total_accounts - hiddenCount;
     const btn = document.getElementById('toggleExcluded');
     const disp = document.getElementById('dispCount');
+    // 区分フィルタ（'ALL' または 'EA'/'PAMM' 等）
+    let catFilter = 'ALL';
+    try { catFilter = localStorage.getItem('ea-check-cat') || 'ALL'; } catch (e) {}
+    const cats = [...new Set(d.accounts.map(a => a.category ?? 'EA'))].sort();
+    if (!['ALL', ...cats].includes(catFilter)) catFilter = 'ALL';
+
     const refresh = () => {
       const shown = document.body.classList.contains('show-excluded');
-      const visible = shown ? d.total_accounts : activeCount;
-      disp.textContent = `一覧に掲載中: ${visible}口座（監視対象 ${activeCount}` +
-        (shown ? ` ＋ 監視除外・長期停止 ${hiddenCount}` : ``) + `） ／ 全${d.total_accounts}口座`;
+      // 実際に表示される行だけを数える（区分フィルタと除外トグルの両方を考慮）
+      let visible = 0, visibleActive = 0;
+      for (const tr of document.querySelectorAll('#rows tr')) {
+        const isHidden = tr.classList.contains('excluded-row');
+        const rowCat = tr.dataset.cat || 'EA';
+        const catOk = (catFilter === 'ALL') || (rowCat === catFilter);
+        const show = catOk && (shown || !isHidden);
+        tr.style.display = show ? '' : 'none';
+        if (show) { visible++; if (!isHidden) visibleActive++; }
+      }
+      const scope = (catFilter === 'ALL') ? '' : `［${catFilter}のみ］`;
+      disp.textContent = `一覧に掲載中: ${visible}口座${scope}` +
+        (shown ? `（うち監視対象 ${visibleActive}）` : ``) + ` ／ 全${d.total_accounts}口座`;
       btn.textContent = shown
         ? `監視除外・長期停止リストを隠す（現在の表示: ${visible}口座）`
         : `監視除外・長期停止リストを表示（現在の表示: ${visible}口座）`;
+      for (const b of document.querySelectorAll('.filter-btn')) {
+        b.classList.toggle('active', b.dataset.cat === catFilter);
+      }
     };
+
+    // 区分が2種類以上あるときだけフィルタボタンを表示
+    if (cats.length > 1) {
+      const fw = document.getElementById('catFilters');
+      fw.innerHTML = ['ALL', ...cats].map(c => {
+        const n = c === 'ALL' ? d.total_accounts
+                              : d.accounts.filter(a => (a.category ?? 'EA') === c).length;
+        const label = c === 'ALL' ? '全区分' : c;
+        return `<button class="filter-btn" data-cat="${c}">${label}（${n}）</button>`;
+      }).join('');
+      for (const b of fw.querySelectorAll('.filter-btn')) {
+        b.onclick = () => {
+          catFilter = b.dataset.cat;
+          try { localStorage.setItem('ea-check-cat', catFilter); } catch (e) {}
+          refresh();
+        };
+      }
+    }
     if (hiddenCount > 0) {
       btn.style.display = 'inline-block';
       btn.onclick = () => {
@@ -164,11 +212,11 @@ fetch('./data/status.json?t=' + Date.now())
         refresh();
       };
     }
-    refresh();
     const tb = document.getElementById('rows');
     for (const a of d.accounts) {
-      tb.insertAdjacentHTML('beforeend', `<tr class="${hiddenLevels.includes(a.level) ? 'excluded-row' : ''}">
+      tb.insertAdjacentHTML('beforeend', `<tr data-cat="${a.category ?? 'EA'}" class="${hiddenLevels.includes(a.level) ? 'excluded-row' : ''}">
         <td><span class="badge ${a.level}">${a.level}</span></td>
+        <td><span class="cat cat-${(a.category ?? 'EA').replace(/[^A-Za-z0-9]/g,'')}">${a.category ?? 'EA'}</span></td>
         <td>${a.name ?? ''}${a.demo ? ' <span class="demo">demo</span>' : ''}</td>
         <td>${a.account_id_masked ?? ''}</td>
         <td>${a.myfxbook_login}</td>
@@ -181,6 +229,8 @@ fetch('./data/status.json?t=' + Date.now())
         <td class="reasons">${(a.reasons || []).join('<br>')}</td>
       </tr>`);
     }
+    // 全行を生成し終えてから表示制御を実行する（行が無い状態で呼ぶと0件になる）
+    refresh();
   })
   .catch(e => {
     document.getElementById('meta').textContent =
