@@ -32,7 +32,23 @@ update_stopped_days: 30
 #    ここに記載がないアカウントは default_category の値が使われる。
 #    将来、区分ごとに判定基準を変える改修（案B）を行う場合も、この対応表を流用する。
 default_category: "EA"
-categories: {}
-  # 例: PAMM管理口座を追加する場合は、上の {} を消してこのように記載する
-  #   pamm1: "PAMM"
-  #   pamm2: "PAMM"
+categories:
+  investar1: "PAMM"
+  miningtrade: "PAMM"
+  investar5: "PAMM"
+  investar21: "PAMM"
+  investar22: "PAMM"
+  investar23: "PAMM"
+  investar24: "PAMM"
+  investar25: "PAMM"
+  investar26: "PAMM"
+  investar27: "PAMM"
+  investar30: "PAMM"
+
+# 6-2) 口座単位の区分上書き（categories より優先）
+#      1つのMyfxbookアカウントにEA口座とPAMM口座が混在する場合に使う。
+#      口座名はダッシュボードの「口座名」列と完全一致で記載する。
+#      記入例:
+#        account_categories:
+#          "NadeshikoFX": "PAMM"
+account_categories: {}
