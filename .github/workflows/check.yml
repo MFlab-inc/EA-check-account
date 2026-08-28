@@ -39,5 +39,22 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/status.json
-          git diff --cached --quiet || git commit -m "update status $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
-          git push
+          # 変更が無ければ何もせず正常終了
+          if git diff --cached --quiet; then
+            echo "変更なし: コミット不要"
+            exit 0
+          fi
+          git commit -m "update status $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
+          # 実行中に別のpush(ファイルのアップロード等)があるとpushが弾かれるため、
+          # 最新を取り込んでから再試行する(最大3回)
+          for i in 1 2 3; do
+            if git push; then
+              echo "push成功 (試行 $i 回目)"
+              exit 0
+            fi
+            echo "pushが拒否されました。最新を取り込んで再試行します (試行 $i 回目)"
+            git pull --rebase --autostash origin main || exit 1
+            sleep 5
+          done
+          echo "3回試行しましたがpushできませんでした"
+          exit 1
