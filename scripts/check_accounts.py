@@ -252,8 +252,11 @@ def main():
                 acct_no = str(acc.get("accountId") or "")
                 results.append({
                     "myfxbook_login": mfb_name,
-                    "category": (th.get("categories") or {}).get(
-                        mfb_name, th.get("default_category", "EA")),
+                    # 区分の優先度: 口座単位の指定 > アカウント単位 > デフォルト
+                    "category": (th.get("account_categories") or {}).get(
+                        acc.get("name"),
+                        (th.get("categories") or {}).get(
+                            mfb_name, th.get("default_category", "EA"))),
                     "myfxbook_oid": oid,  # Myfxbook内部ID(公開プロフィールURLと同一情報)
                     "name": acc.get("name"),
                     "account_id_masked": ("***" + acct_no[-3:]) if acct_no else None,
