@@ -26,3 +26,13 @@ per_login_sleep_sec: 3
 #    これを超える更新停止はALERTでなくSTOPPED（長期停止）に分類し、
 #    直近の異変（ALERT/WARN）と区別する
 update_stopped_days: 30
+
+# 6) 口座区分ラベル（案A: 表示のみ。判定基準は現状すべて共通）
+#    キーは MYFXBOOK_CREDENTIALS のアカウント名（investar1 等）と完全一致させる。
+#    ここに記載がないアカウントは default_category の値が使われる。
+#    将来、区分ごとに判定基準を変える改修（案B）を行う場合も、この対応表を流用する。
+default_category: "EA"
+categories: {}
+  # 例: PAMM管理口座を追加する場合は、上の {} を消してこのように記載する
+  #   pamm1: "PAMM"
+  #   pamm2: "PAMM"
