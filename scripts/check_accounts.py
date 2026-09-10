@@ -33,6 +33,12 @@ CONFIG_PATH = ROOT / "config" / "thresholds.yaml"
 UA = "EA-check-account/1.0 (github-actions; monitoring own accounts)"
 
 
+class AuthError(RuntimeError):
+    """認証拒否。何度試しても結果は変わらないためリトライしない
+    (Myfxbookは試行回数制限中も同じ文言を返すことがあるため、
+     無駄な再試行が制限をさらに悪化させる)"""
+
+
 def api_get(endpoint: str, params: dict, retries: int = 3) -> dict:
     qs = urllib.parse.urlencode(params)
     url = f"{API_BASE}/{endpoint}?{qs}"
@@ -43,8 +49,15 @@ def api_get(endpoint: str, params: dict, retries: int = 3) -> dict:
             with urllib.request.urlopen(req, timeout=30) as r:
                 data = json.loads(r.read().decode("utf-8"))
             if data.get("error"):
-                raise RuntimeError(f"API error: {data.get('message', 'unknown')}")
+                msg = str(data.get("message", "unknown"))
+                # 認証系のエラーは即座に打ち切る(リトライしても無意味かつ有害)
+                if "email" in msg.lower() or "password" in msg.lower() \
+                        or "メール" in msg or "パスワード" in msg:
+                    raise AuthError(f"API error: {msg}")
+                raise RuntimeError(f"API error: {msg}")
             return data
+        except AuthError:
+            raise
         except Exception as e:  # noqa: BLE001
             last_err = e
             time.sleep(2 * (i + 1))
@@ -210,7 +223,15 @@ def main():
     results = []
     login_errors = []
 
+    consecutive_auth_fail = 0
+    abort_threshold = th.get("abort_after_consecutive_auth_failures", 3)
+    aborted = False
+
     for mfb_name, cred in credentials.items():
+        if aborted:
+            login_errors.append({"myfxbook_login": mfb_name,
+                                 "error": "前段の連続失敗により未実行(中断)"})
+            continue
         session = None
         try:
             login = api_get("login.json", {"email": cred["email"], "password": cred["password"]})
@@ -218,6 +239,7 @@ def main():
             # 一度デコードしてから使う。そのまま使うとurlencodeで%→%25に二重変換され
             # 以降の呼び出しが全てInvalid sessionになる。
             session = urllib.parse.unquote(login["session"])
+            consecutive_auth_fail = 0  # 成功したらカウンタをリセット
             accounts = api_get("get-my-accounts.json", {"session": session}).get("accounts", [])
             print(f"[{mfb_name}] {len(accounts)} accounts")
 
@@ -267,6 +289,16 @@ def main():
                     **ev,
                 })
                 time.sleep(th.get("per_account_sleep_sec", 2))
+        except AuthError as e:
+            consecutive_auth_fail += 1
+            login_errors.append({"myfxbook_login": mfb_name, "error": str(e)})
+            print(f"[{mfb_name}] AUTH FAILED: {e}", file=sys.stderr)
+            # 認証拒否が連続する場合、個別の認証情報の問題ではなく
+            # API側の試行回数制限の可能性が高い。これ以上叩くと制限が悪化するため中断する
+            if consecutive_auth_fail >= abort_threshold:
+                aborted = True
+                print(f"認証拒否が{consecutive_auth_fail}件連続したため、"
+                      f"残りのアカウントをスキップします", file=sys.stderr)
         except Exception as e:  # noqa: BLE001
             login_errors.append({"myfxbook_login": mfb_name, "error": str(e)})
             print(f"[{mfb_name}] FAILED: {e}", file=sys.stderr)
