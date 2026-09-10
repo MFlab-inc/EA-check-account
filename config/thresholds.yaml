@@ -53,3 +53,9 @@ categories:
 #        account_categories:
 #          "NadeshikoFX": "PAMM"
 account_categories: {}
+
+# 7) 連続認証失敗時の中断（API側の試行回数制限を悪化させないための安全装置）
+#    認証拒否がこの件数だけ連続したら、残りのアカウントをスキップして終了する。
+#    Myfxbookは制限中も「Wrong email/password」を返すことがあるため、
+#    個別の認証情報の問題と区別がつかない。無駄に叩き続けない方が安全。
+abort_after_consecutive_auth_failures: 3
